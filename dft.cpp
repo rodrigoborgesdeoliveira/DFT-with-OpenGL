@@ -1,5 +1,5 @@
 /*
- *Cálculo da DFT e exibição gráfica utilizando OpenGL
+ *DFT calculus and graphics exhibition using OpenGL
  *
  *Rodrigo Borges de Oliveira
  */
@@ -38,12 +38,12 @@ void DesenhaReal(){
         }
     }
     ler.close();
-    glClear(GL_COLOR_BUFFER_BIT); //Limpa o buffer padrão toda vez que chamar a função Desenha.
-    glMatrixMode(GL_PROJECTION); //Fazer uma projeção para fixar a visualização. Manterá o aspecto ao redimensionar a tela.
-    glLoadIdentity(); //Carregar projeção(PROJECTION)
-    gluOrtho2D(-1,FS/1000+2,-(maior+1.2),maior+1.2); //Desenhar a linha dentro de um espaço definido. -3 à esquerda, 3 à direita, -3 embaixo, 3 em cima.
-    glMatrixMode(GL_MODELVIEW); //Visualização do tipo modelo
-    glLoadIdentity(); //Carregar o modelo(MODELVIEW)
+    glClear(GL_COLOR_BUFFER_BIT); 
+    glMatrixMode(GL_PROJECTION); 
+    glLoadIdentity(); 
+    gluOrtho2D(-1,FS/1000+2,-(maior+1.2),maior+1.2); 
+    glMatrixMode(GL_MODELVIEW); 
+    glLoadIdentity();
     glColor3f(0.5,0.5,0.5);
     //X e Y
     glBegin(GL_LINES);
@@ -52,7 +52,7 @@ void DesenhaReal(){
         glVertex2f(0,-(maior+0.7));
         glVertex2f(0,maior+0.7);
     glEnd();
-    //Flecha no final de x e y
+    //Arrow at x and y
     glBegin(GL_TRIANGLES);
         //Flecha em x
         glVertex2f(FS/1000+1,0.05);
@@ -61,44 +61,44 @@ void DesenhaReal(){
     glEnd();
 
     glBegin(GL_TRIANGLES);
-        //Flecha em y
+        //Arrow at y
         glVertex2f(-0.05,maior+0.7);
         glVertex2f(0,maior+0.75);
         glVertex2f(0.05,maior+0.7);
     glEnd();
 
-    //Texto X(m)
+    //Text X(m)
     glColor3f(0,0,0);
     glRasterPos2f(0.1,maior+0.7);
     Texto(GLUT_BITMAP_TIMES_ROMAN_10,"X(m)");
 
-    //Texto KHz
+    //Text KHz
     glColor3f(0,0,0);
     glRasterPos2f(FS/1000+1,0.1);
     Texto(GLUT_BITMAP_TIMES_ROMAN_10,"KHz");
 
     for(int i=0; i<N; i++){
-        glColor3f(0,0,0); // Cor da linha
-        glPointSize(2.5); //Tamanho do ponto
-        x = (i*FS/N); //Resposta em Hz
-        x = x/1000; //Transformar em KHz
-        glBegin(GL_LINES); //Solicitar a geração de uma imagem. Como parâmetro, desenhar uma linha.
-            glVertex2f(x,0); //Desenhar a linha do ponto i no eixo x, e 0 no eixo y.
-            glVertex2f(x,real[i]); //Até o ponto i no eixo x, e real[i] no eixo y.
-        glEnd(); //Encerrar
+        glColor3f(0,0,0); 
+        glPointSize(2.5); 
+        x = (i*FS/N); 
+        x = x/1000; 
+        glBegin(GL_LINES); 
+            glVertex2f(x,0);
+            glVertex2f(x,real[i]);
+        glEnd(); 
 
         glBegin(GL_POINTS);
             glVertex2f(x,real[i]);
         glEnd();
 
-        //Valores em y
+        //Y values
         glColor3f(0,0,0);
         glRasterPos2f(-.7,real[i]);
         sprintf(buffer,"%.10g", real[i] );
         sprintf(valor,buffer);
         Texto(GLUT_BITMAP_TIMES_ROMAN_10,valor);
 
-        //Valores em x
+        //X values
         glColor3f(0,0,0);
         if(real[i]>=0){
             glRasterPos2f(x,-0.5);
@@ -110,7 +110,7 @@ void DesenhaReal(){
         sprintf(valor,buffer);
         Texto(GLUT_BITMAP_TIMES_ROMAN_10,valor);
 
-        glFlush(); //Carregar no Buffer
+        glFlush(); 
     }
 }
 
@@ -130,12 +130,12 @@ void DesenhaImag(){
         }
     }
     ler.close();
-    glClear(GL_COLOR_BUFFER_BIT); //Limpa o buffer padrão toda vez que chamar a função Desenha.
-    glMatrixMode(GL_PROJECTION); //Fazer uma projeção para fixar a visualização. Manterá o aspecto ao redimensionar a tela.
-    glLoadIdentity(); //Carregar projeção(PROJECTION)
-    gluOrtho2D(-1,FS/1000+2,-(maior+1.2),maior+1.2); //Desenhar a linha dentro de um espaço definido. -3 à esquerda, 3 à direita, -3 embaixo, 3 em cima.
-    glMatrixMode(GL_MODELVIEW); //Visualização do tipo modelo
-    glLoadIdentity(); //Carregar o modelo(MODELVIEW)
+    glClear(GL_COLOR_BUFFER_BIT);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(-1,FS/1000+2,-(maior+1.2),maior+1.2);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
     glColor3f(0.5,0.5,0.5);
     //X e Y
     glBegin(GL_LINES);
@@ -144,53 +144,53 @@ void DesenhaImag(){
         glVertex2f(0,-(maior+0.7));
         glVertex2f(0,maior+0.7);
     glEnd();
-    //Flecha no final de x e y
+    //Arrow at x and y
     glBegin(GL_TRIANGLES);
-        //Flecha em x
+        //Arrow at x
         glVertex2f(FS/1000+1,0.05);
         glVertex2f(FS/1000+1.05,0);
         glVertex2f(FS/1000+1,-0.05);
     glEnd();
 
     glBegin(GL_TRIANGLES);
-        //Flecha em y
+        //Arrow at y
         glVertex2f(-0.05,maior+0.7);
         glVertex2f(0,maior+0.75);
         glVertex2f(0.05,maior+0.7);
     glEnd();
 
-    //Texto X(m)
+    //Text X(m)
     glColor3f(0,0,0);
     glRasterPos2f(0.1,maior+0.7);
     Texto(GLUT_BITMAP_TIMES_ROMAN_10,"X(m)");
 
-    //Texto KHz
+    //Text KHz
     glColor3f(0,0,0);
     glRasterPos2f(FS/1000+1,0.1);
     Texto(GLUT_BITMAP_TIMES_ROMAN_10,"KHz");
 
     for(int i=0; i<N; i++){
-        glColor3f(0,0,0); // Cor da linha
-        glPointSize(2.5); //Tamanho do ponto
-        x = (i*FS/N); //Resposta em Hz
-        x = x/1000; //Transformar em KHz
-        glBegin(GL_LINES); //Solicitar a geração de uma imagem. Como parâmetro, desenhar uma linha.
-            glVertex2f(x,0); //Desenhar a linha do ponto i no eixo x, e 0 no eixo y.
-            glVertex2f(x,imag[i]); //Até o ponto i no eixo x, e real[i] no eixo y.
-        glEnd(); //Encerrar
+        glColor3f(0,0,0);
+        glPointSize(2.5);
+        x = (i*FS/N);
+        x = x/1000;
+        glBegin(GL_LINES);
+            glVertex2f(x,0);
+            glVertex2f(x,imag[i]); 
+        glEnd();
 
         glBegin(GL_POINTS);
             glVertex2f(x,imag[i]);
         glEnd();
 
-        //Valores em y
+        //y values
         glColor3f(0,0,0);
         glRasterPos2f(-.7,imag[i]);
         sprintf(buffer,"%.10g", imag[i] );
         sprintf(valor,buffer);
         Texto(GLUT_BITMAP_TIMES_ROMAN_10,valor);
 
-        //Valores em x
+        //x values
         glColor3f(0,0,0);
         if(imag[i]>=0){
             glRasterPos2f(x,-0.5);
@@ -202,7 +202,7 @@ void DesenhaImag(){
         sprintf(valor,buffer);
         Texto(GLUT_BITMAP_TIMES_ROMAN_10,valor);
 
-        glFlush(); //Carregar no Buffer
+        glFlush(); 
     }
 }
 
@@ -222,12 +222,12 @@ void DesenhaMag(){
         }
     }
     ler.close();
-    glClear(GL_COLOR_BUFFER_BIT); //Limpa o buffer padrão toda vez que chamar a função Desenha.
-    glMatrixMode(GL_PROJECTION); //Fazer uma projeção para fixar a visualização. Manterá o aspecto ao redimensionar a tela.
-    glLoadIdentity(); //Carregar projeção(PROJECTION)
-    gluOrtho2D(-1,FS/1000+2,-(maior+1.2),maior+1.2); //Desenhar a linha dentro de um espaço definido. -3 à esquerda, 3 à direita, -3 embaixo, 3 em cima.
-    glMatrixMode(GL_MODELVIEW); //Visualização do tipo modelo
-    glLoadIdentity(); //Carregar o modelo(MODELVIEW)
+    glClear(GL_COLOR_BUFFER_BIT);
+    glMatrixMode(GL_PROJECTION); 
+    glLoadIdentity(); 
+    gluOrtho2D(-1,FS/1000+2,-(maior+1.2),maior+1.2);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity(); 
     glColor3f(0.5,0.5,0.5);
     //X e Y
     glBegin(GL_LINES);
@@ -236,7 +236,7 @@ void DesenhaMag(){
         glVertex2f(0,-(maior+0.7));
         glVertex2f(0,maior+0.7);
     glEnd();
-    //Flecha no final de x e y
+    //Arrow at x and y
     glBegin(GL_TRIANGLES);
         //Flecha em x
         glVertex2f(FS/1000+1,0.05);
@@ -245,44 +245,44 @@ void DesenhaMag(){
     glEnd();
 
     glBegin(GL_TRIANGLES);
-        //Flecha em y
+        //Arrow at y
         glVertex2f(-0.05,maior+0.7);
         glVertex2f(0,maior+0.75);
         glVertex2f(0.05,maior+0.7);
     glEnd();
 
-    //Texto X(m)
+    //Text X(m)
     glColor3f(0,0,0);
     glRasterPos2f(0.1,maior+0.7);
     Texto(GLUT_BITMAP_TIMES_ROMAN_10,"X(m)");
 
-    //Texto KHz
+    //Text KHz
     glColor3f(0,0,0);
     glRasterPos2f(FS/1000+1,0.1);
     Texto(GLUT_BITMAP_TIMES_ROMAN_10,"KHz");
 
     for(int i=0; i<N; i++){
-        glColor3f(0,0,0); // Cor da linha
-        glPointSize(2.5); //Tamanho do ponto
-        x = (i*FS/N); //Resposta em Hz
-        x = x/1000; //Transformar em KHz
-        glBegin(GL_LINES); //Solicitar a geração de uma imagem. Como parâmetro, desenhar uma linha.
-            glVertex2f(x,0); //Desenhar a linha do ponto i no eixo x, e 0 no eixo y.
-            glVertex2f(x,mag[i]); //Até o ponto i no eixo x, e real[i] no eixo y.
-        glEnd(); //Encerrar
+        glColor3f(0,0,0);
+        glPointSize(2.5);
+        x = (i*FS/N); 
+        x = x/1000; 
+        glBegin(GL_LINES); 
+            glVertex2f(x,0);
+            glVertex2f(x,mag[i]);
+        glEnd(); 
 
         glBegin(GL_POINTS);
             glVertex2f(x,mag[i]);
         glEnd();
 
-        //Valores em y
+        //y values
         glColor3f(0,0,0);
         glRasterPos2f(-.7,mag[i]);
         sprintf(buffer,"%.10g", mag[i]);
         sprintf(valor,buffer);
         Texto(GLUT_BITMAP_TIMES_ROMAN_10,valor);
 
-        //Valores em x
+        //x values
         glColor3f(0,0,0);
         if(mag[i]>=0){
             glRasterPos2f(x,-0.5);
@@ -294,7 +294,7 @@ void DesenhaMag(){
         sprintf(valor,buffer);
         Texto(GLUT_BITMAP_TIMES_ROMAN_10,valor);
 
-        glFlush(); //Carregar no Buffer
+        glFlush(); 
     }
 }
 
@@ -314,12 +314,12 @@ void DesenhaFase(){
         }
     }
     ler.close();
-    glClear(GL_COLOR_BUFFER_BIT); //Limpa o buffer padrão toda vez que chamar a função Desenha.
-    glMatrixMode(GL_PROJECTION); //Fazer uma projeção para fixar a visualização. Manterá o aspecto ao redimensionar a tela.
-    glLoadIdentity(); //Carregar projeção(PROJECTION)
-    gluOrtho2D(-1,FS/1000+2,-(maior+5),maior+5); //Desenhar a linha dentro de um espaço definido. -3 à esquerda, 3 à direita, -3 embaixo, 3 em cima.
-    glMatrixMode(GL_MODELVIEW); //Visualização do tipo modelo
-    glLoadIdentity(); //Carregar o modelo(MODELVIEW)
+    glClear(GL_COLOR_BUFFER_BIT);
+    glMatrixMode(GL_PROJECTION); 
+    glLoadIdentity(); 
+    gluOrtho2D(-1,FS/1000+2,-(maior+5),maior+5);
+    glMatrixMode(GL_MODELVIEW); 
+    glLoadIdentity(); 
     glColor3f(0.5,0.5,0.5);
     //X e Y
     glBegin(GL_LINES);
@@ -328,27 +328,27 @@ void DesenhaFase(){
         glVertex2f(0,-(maior+0.7));
         glVertex2f(0,maior+0.7);
     glEnd();
-    //Flecha no final de x e y
+    //Arrow at x and y
     glBegin(GL_TRIANGLES);
-        //Flecha em x
+        //Arrow at x
         glVertex2f(FS/1000+1,0.05);
         glVertex2f(FS/1000+1.05,0);
         glVertex2f(FS/1000+1,-0.05);
     glEnd();
 
     glBegin(GL_TRIANGLES);
-        //Flecha em y
+        //Arrow at y
         glVertex2f(-0.07,maior+0.7);
         glVertex2f(0,maior+0.75);
         glVertex2f(0.07,maior+0.7);
     glEnd();
 
-    //Texto X(m)
+    //Text= X(m)
     glColor3f(0,0,0);
     glRasterPos2f(0.1,maior+0.7);
     Texto(GLUT_BITMAP_TIMES_ROMAN_10,"X(m)");
 
-    //Texto KHz
+    //Text KHz
     glColor3f(0,0,0);
     glRasterPos2f(FS/1000+1,0.1);
     Texto(GLUT_BITMAP_TIMES_ROMAN_10,"KHz");
@@ -358,23 +358,23 @@ void DesenhaFase(){
         glPointSize(2.5); //Tamanho do ponto
         x = (i*FS/N); //Resposta em Hz
         x = x/1000; //Transformar em KHz
-        glBegin(GL_LINES); //Solicitar a geração de uma imagem. Como parâmetro, desenhar uma linha.
-            glVertex2f(x,0); //Desenhar a linha do ponto i no eixo x, e 0 no eixo y.
-            glVertex2f(x,fase[i]); //Até o ponto i no eixo x, e real[i] no eixo y.
-        glEnd(); //Encerrar
+        glBegin(GL_LINES); 
+            glVertex2f(x,0);
+            glVertex2f(x,fase[i]); 
+        glEnd(); 
 
         glBegin(GL_POINTS);
             glVertex2f(x,fase[i]);
         glEnd();
 
-        //Valores em y
+        //y values
         glColor3f(0,0,0);
         glRasterPos2f(-.7,fase[i]);
         sprintf(buffer,"%.10g", fase[i]);
         sprintf(valor,buffer);
         Texto(GLUT_BITMAP_TIMES_ROMAN_10,valor);
 
-        //Valores em x
+        //x values
         glColor3f(0,0,0);
         if(fase[i]>=0){
             glRasterPos2f(x,-1.5);
@@ -386,7 +386,7 @@ void DesenhaFase(){
         sprintf(valor,buffer);
         Texto(GLUT_BITMAP_TIMES_ROMAN_10,valor);
 
-        glFlush(); //Carregar no Buffer
+        glFlush(); 
     }
 }
 
@@ -412,7 +412,6 @@ void Calcula(){
 			}
 		}
 
-		//Quatro casas decimais
 		real = real * 10000;
 		real = (int)real;
 		real = real / 10000;
@@ -445,34 +444,34 @@ void Calcula(){
 int main(void){
     Calcula();
     //Retangular - Real
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB); //single, apenas um buffer. RGB, cores.
-    glutInitWindowSize(800,400); //Tamanho da janela
-    glutInitWindowPosition(0,0); //Posição inicial da janela
-    glutCreateWindow("DFT - OpenGL - Retangular (Real)"); //Criar a  janela e definir o título dela.
-    glutDisplayFunc(DesenhaReal); //Chama a função Desenha, toda vez que houver uma interação com a tela.
-    glClearColor(1,1,1,0); //Cor de fundo da tela, Red - 1, Green - 1, Blue - 1, Alpha - 0
-    //Retangular - Imagem
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB); //single, apenas um buffer. RGB, cores.
-    glutInitWindowSize(800,400); //Tamanho da janela
-    glutInitWindowPosition(500,0); //Posição inicial da janela
-    glutCreateWindow("DFT - OpenGL - Retangular (Imagem)"); //Criar a  janela e definir o título dela.
-    glutDisplayFunc(DesenhaImag); //Chama a função Desenha, toda vez que houver uma interação com a tela.
-    glClearColor(1,1,1,0); //Cor de fundo da tela, Red - 1, Green - 1, Blue - 1, Alpha - 0
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB); 
+    glutInitWindowSize(800,400); 
+    glutInitWindowPosition(0,0); 
+    glutCreateWindow("DFT - OpenGL - Retangular (Real)"); 
+    glutDisplayFunc(DesenhaReal); 
+    glClearColor(1,1,1,0); 
+    //Retangular - Image
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB); 
+    glutInitWindowSize(800,400);
+    glutInitWindowPosition(500,0);
+    glutCreateWindow("DFT - OpenGL - Retangular (Imagem)"); 
+    glutDisplayFunc(DesenhaImag); 
+    glClearColor(1,1,1,0); 
     //Polar - Magnitude
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB); //single, apenas um buffer. RGB, cores.
-    glutInitWindowSize(800,400); //Tamanho da janela
-    glutInitWindowPosition(0,384); //Posição inicial da janela
-    glutCreateWindow("DFT - OpenGL - Polar (Magnitude)"); //Criar a  janela e definir o título dela.
-    glutDisplayFunc(DesenhaMag); //Chama a função Desenha, toda vez que houver uma interação com a tela.
-    glClearColor(1,1,1,0); //Cor de fundo da tela, Red - 1, Green - 1, Blue - 1, Alpha - 0
-    //Polar - Fase
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB); //single, apenas um buffer. RGB, cores.
-    glutInitWindowSize(800,400); //Tamanho da janela
-    glutInitWindowPosition(500,384); //Posição inicial da janela
-    glutCreateWindow("DFT - OpenGL - Polar (Fase)"); //Criar a  janela e definir o título dela.
-    glutDisplayFunc(DesenhaFase); //Chama a função Desenha, toda vez que houver uma interação com a tela.
-    glClearColor(1,1,1,0); //Cor de fundo da tela, Red - 1, Green - 1, Blue - 1, Alpha - 0
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB); 
+    glutInitWindowSize(800,400); 
+    glutInitWindowPosition(0,384); 
+    glutCreateWindow("DFT - OpenGL - Polar (Magnitude)"); 
+    glutDisplayFunc(DesenhaMag); 
+    glClearColor(1,1,1,0); 
+    //Polar - Phase
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    glutInitWindowSize(800,400); 
+    glutInitWindowPosition(500,384);
+    glutCreateWindow("DFT - OpenGL - Polar (Fase)");
+    glutDisplayFunc(DesenhaFase);
+    glClearColor(1,1,1,0); 
 
-    glutMainLoop(); //Loop infinito que fica só escutando o sistema.
+    glutMainLoop(); 
     return 0;
 }
